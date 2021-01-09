@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="C语言 程序入口 main函数 void main(){}     基本语法 令牌（Token） 分号di ;   注释 单行注释 &#x2F;&#x2F;   多行注释 &#x2F;* *&#x2F;     标识符 一个标识符以字母 A-Z 或 a-z 或下划线 _ 开始，后跟零个或多个字母、下划线和数字（0-9）   关键字 空格     数据类型 基本类型 整数类型 char short int int long int">
+<meta property="og:type" content="website">
+<meta property="og:title" content="C Programming Language">
+<meta property="og:url" content="http://example.com/c/index.html">
+<meta property="og:site_name" content="博客笔记">
+<meta property="og:description" content="C语言 程序入口 main函数 void main(){}     基本语法 令牌（Token） 分号di ;   注释 单行注释 &#x2F;&#x2F;   多行注释 &#x2F;* *&#x2F;     标识符 一个标识符以字母 A-Z 或 a-z 或下划线 _ 开始，后跟零个或多个字母、下划线和数字（0-9）   关键字 空格     数据类型 基本类型 整数类型 char short int int long int">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-09T06:07:41.000Z">
+<meta property="article:modified_time" content="2021-01-09T10:15:14.170Z">
+<meta property="article:author" content="Zephyr Yu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/c/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>C Programming Language | 博客笔记
+</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">博客笔记</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-知识点"><a href="/knowledge-node" rel="section"><i class="fa fa-sitemap fa-fw"></i>知识点</a></li>
+        <li class="menu-item menu-item-c语言"><a href="/c" rel="section"><i class="fa fa-chevron-right fa-fw"></i>C语言</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.</span> <span class="nav-text">关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C99-%E6%96%B0%E5%A2%9E%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.1.</span> <span class="nav-text">C99 新增关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C11-%E6%96%B0%E5%A2%9E%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.2.</span> <span class="nav-text">C11 新增关键字</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zephyr Yu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+  
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">C Programming Language
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<blockquote class="pullquote mindmap mindmap-md"><ul>
+<li>C语言<ul>
+<li>程序入口<ul>
+<li>main函数<ul>
+<li>void main(){}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本语法<ul>
+<li>令牌（Token）<ul>
+<li>分号di<ul>
+<li>;</li>
+</ul>
+</li>
+<li>注释<ul>
+<li>单行注释<ul>
+<li>//</li>
+</ul>
+</li>
+<li>多行注释<ul>
+<li>/* */</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>标识符<ul>
+<li>一个标识符以字母 A-Z 或 a-z 或下划线 _ 开始，后跟零个或多个字母、下划线和数字（0-9）</li>
+</ul>
+</li>
+<li>关键字</li>
+<li>空格</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据类型<ul>
+<li>基本类型<ul>
+<li>整数类型<ul>
+<li>char</li>
+<li>short int</li>
+<li>int</li>
+<li>long int</li>
+</ul>
+</li>
+<li>浮点类型<ul>
+<li>float</li>
+<li>double</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>枚举类型<ul>
+<li>enum</li>
+</ul>
+</li>
+<li>void类型<ul>
+<li>表示空</li>
+</ul>
+</li>
+<li>派生类型</li>
+</ul>
+</li>
+<li>常量和变量<ul>
+<li>变量</li>
+<li>常量<ul>
+<li>define</li>
+<li>const</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+<!--
+  - 运算符
+  - 流程控制
+    - 判断
+    - 循环
+  - 函数
+  - 数组
+  - 枚举
+  - 指针
+  - 字符串
+  - 结构体
+  - 共用体
+-->
+
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><table>
+<thead>
+<tr>
+<th align="center">关键字</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">auto</td>
+<td align="left">声明自动变量</td>
+</tr>
+<tr>
+<td align="center">break</td>
+<td align="left">跳出当前循环</td>
+</tr>
+<tr>
+<td align="center">case</td>
+<td align="left">开关语句分支</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="left">声明字符型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td align="center">const</td>
+<td align="left">定义常量，如果一个变量被 const 修饰，那么它的值就不能再被改变</td>
+</tr>
+<tr>
+<td align="center">continue</td>
+<td align="left">结束当前循环，开始下一轮循环</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="left">开关语句中的”其它”分支</td>
+</tr>
+<tr>
+<td align="center">do</td>
+<td align="left">循环语句的循环体</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="left">声明双精度浮点型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td align="center">else</td>
+<td align="left">条件语句否定分支（与 if 连用）</td>
+</tr>
+<tr>
+<td align="center">enum</td>
+<td align="left">声明枚举类型</td>
+</tr>
+<tr>
+<td align="center">extern</td>
+<td align="left">声明变量或函数是在其它文件或本文件的其他位置定义</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="left">声明浮点型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td align="center">for</td>
+<td align="left">一种循环语句</td>
+</tr>
+<tr>
+<td align="center">goto</td>
+<td align="left">无条件跳转语句</td>
+</tr>
+<tr>
+<td align="center">if</td>
+<td align="left">条件语句</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="left">声明整型变量或函数</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="left">声明长整型变量或函数返回值类型</td>
+</tr>
+<tr>
+<td align="center">register</td>
+<td align="left">声明寄存器变量</td>
+</tr>
+<tr>
+<td align="center">return</td>
+<td align="left">子程序返回语句（可以带参数，也可不带参数）</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="left">声明短整型变量或函数</td>
+</tr>
+<tr>
+<td align="center">signed</td>
+<td align="left">声明有符号类型变量或函数</td>
+</tr>
+<tr>
+<td align="center">sizeof</td>
+<td align="left">计算数据类型或变量长度（即所占字节数）</td>
+</tr>
+<tr>
+<td align="center">static</td>
+<td align="left">声明静态变量</td>
+</tr>
+<tr>
+<td align="center">struct</td>
+<td align="left">声明结构体类型</td>
+</tr>
+<tr>
+<td align="center">switch</td>
+<td align="left">用于开关语句</td>
+</tr>
+<tr>
+<td align="center">typedef</td>
+<td align="left">用以给数据类型取别名</td>
+</tr>
+<tr>
+<td align="center">unsigned</td>
+<td align="left">声明无符号类型变量或函数</td>
+</tr>
+<tr>
+<td align="center">union</td>
+<td align="left">声明共用体类型</td>
+</tr>
+<tr>
+<td align="center">void</td>
+<td align="left">声明函数无返回值或无参数，声明无类型指针</td>
+</tr>
+<tr>
+<td align="center">volatile</td>
+<td align="left">说明变量在程序执行中可被隐含地改变</td>
+</tr>
+<tr>
+<td align="center">while</td>
+<td align="left">循环语句的循环条件</td>
+</tr>
+</tbody></table>
+<h3 id="C99-新增关键字"><a href="#C99-新增关键字" class="headerlink" title="C99 新增关键字"></a>C99 新增关键字</h3><table class="reference">
+<tbody>
+<td width="20%">_Bool
+<td width="20%">_Complex
+<td width="20%">_Imaginary
+<td width="20%">inline
+<td width="20%">restrict
+</tbody></table>
+
+<h3 id="C11-新增关键字"><a href="#C11-新增关键字" class="headerlink" title="C11 新增关键字"></a>C11 新增关键字</h3><table class="reference">
+<tbody>
+<td width="20%">_Alignas
+<td width="20%">_Alignof
+<td width="20%">_Atomic
+<td width="20%">_Generic
+<td width="20%">_Noreturn
+<td width="20%">_Static_assert
+<td width="20%">_Thread_local
+</tbody></table><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kity@2.0.4/dist/kity.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/kityminder-core@1.4.50/dist/kityminder.core.min.js"></script><script defer="true" type="text/javascript" src="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/hexo-simple-mindmap@0.2.0/dist/mindmap.min.css">
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zephyr Yu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
